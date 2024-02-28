@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>CASURECO I</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <style>
+
+    </style>
+
+
+
+    <div class="container">
+        <h3 style="color:red; font-size:150px;">Student Datasheet</h3>
+        <br>
+
+        <label>Name: </label>
+        <input type="text" id="name" class="form-control" />
+
+
+
+        <label>Address: </label>
+        <input class="form-control" type="text" id="address" />
+
+        <label>Age: </label>
+        <input class="form-control" type="number" id="age" />
+
+        <label>Gender: </label>
+        <select class="form-control" id="gender">
+            <option value="M">MALE</option>
+            <option value="F">FEMALE</option>
+        </select>
+        <br>
+        <br>
+        <button class="btn btn-primary" onclick="add()">ADD</button>
+
+        <button class="btn btn-danger" onclick="clear_form()">CLEAR</button>
+
+
+        <br>
+        <br>
+        <table class="table">
+            <thead>
+                <th>#</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </thead>
+
+            <tbody id="student_table">
+
+            </tbody>
+
+        </table>
+    </div>
+
+
+
+</body>
+<script>
+    function clear_form() {
+        document.getElementById("name").value = "";
+        document.getElementById("address").value = "";
+        document.getElementById("gender").value = "";
+        document.getElementById("age").value = "";
+    }
+
+
+    function add() {
+        const name = document.getElementById("name").value;
+        const age = document.getElementById("age").value;
+        const gender = document.getElementById("gender").value;
+        const address = document.getElementById("address").value;
+
+        const tr = document.createElement("tr");
+        const td_num = document.createElement("td");
+        const td_name = document.createElement("td");
+        const td_age = document.createElement("td");
+        const td_gender = document.createElement("td");
+        const td_address = document.createElement("td");
+        const td_button = document.createElement("button");
+        const td_edit = document.createElement("button"); //added
+
+        td_button.setAttribute("class", "btn btn-danger");
+        td_edit.setAttribute("class", "btn btn-success");
+
+
+        td_num.innerText = generate_id();
+        td_name.innerText = name;
+        td_age.innerText = age;
+        td_gender.innerText = gender;
+        td_address.innerText = address;
+        td_button.innerText = "Remove";
+        td_edit.innerText = "Edit"; //added
+
+        td_button.addEventListener("click", function() {
+            tr.remove();
+        })
+
+        tr.appendChild(td_num);
+        tr.appendChild(td_name);
+        tr.appendChild(td_address);
+        tr.appendChild(td_age);
+        tr.appendChild(td_gender);
+        tr.appendChild(td_button);
+        tr.appendChild(td_edit); //added
+
+
+
+        const student_table = document.getElementById("student_table")
+        student_table.appendChild(tr);
+
+        clear_form();
+    }
+
+    function generate_id() {
+        let random = Math.random() * 10000;
+        rounded_off_random = Math.floor(random);
+        return rounded_off_random;
+    }
+</script>
+
+</html>
